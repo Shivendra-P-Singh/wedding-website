@@ -34,11 +34,21 @@ body.locked{overflow:hidden;height:100vh}
 .gi h1{font-size:clamp(2.4rem,9vw,3.6rem);line-height:1.1;font-weight:400}
 .ganesha{color:#ffd27a;font-family:'Noto Serif Devanagari','Devanagari Sangam MN',serif;font-size:clamp(1.2rem,4vw,1.65rem);letter-spacing:.12em;text-shadow:0 0 18px rgba(255,191,73,.65)}
 .ganesha-mark{display:block;width:116px;height:116px;object-fit:cover;border-radius:24px;overflow:hidden;border:2px solid rgba(210,160,91,.55);filter:brightness(.78) saturate(.9) drop-shadow(0 0 12px rgba(255,185,72,.52))}
-.lantern{position:absolute;width:52px;height:78px;border-radius:44% 44% 38% 38%;background:linear-gradient(180deg,#ed117e 0%,#ff3b32 28%,#ff8d12 68%,#ffb21e 100%);box-shadow:0 0 28px rgba(255,93,26,.75),inset 0 -12px 20px rgba(255,235,104,.55);animation:float 7s ease-in-out infinite;opacity:.9}
-.lantern:before{content:"";position:absolute;inset:9px 7px;border-radius:42%;background:radial-gradient(ellipse at 50% 62%,rgba(255,242,155,.9),rgba(255,137,19,.16) 58%,transparent 72%);filter:blur(2px)}
-.lantern.left{left:9%;top:18%;animation-delay:-2s}.lantern.right{right:11%;top:30%;animation-delay:-4.5s}.lantern.mid{left:50%;top:9%;width:44px;height:67px;animation-delay:-1s}
-.hero .lantern{z-index:1;opacity:.5}
-@keyframes float{0%,100%{transform:translate3d(0,0,0) rotate(-3deg)}50%{transform:translate3d(18px,-30px,0) rotate(4deg)}}
+.lantern{position:absolute;width:58px;height:90px;pointer-events:none;z-index:2;opacity:0;transform:translate3d(0,-120vh,0) rotate(-8deg);will-change:transform,opacity}
+.lantern-body{position:absolute;inset:0;border:1px solid rgba(255,220,137,.72);border-radius:46% 46% 38% 38%;background:radial-gradient(ellipse at 50% 58%,rgba(255,245,170,.98) 0 12%,rgba(255,169,35,.92) 38%,rgba(221,43,42,.96) 72%,rgba(128,17,49,.96));box-shadow:0 0 30px rgba(255,161,47,.78),0 0 8px rgba(255,238,167,.9) inset;animation:lantern-drift 5.8s ease-in-out infinite}
+.lantern-body:before{content:"";position:absolute;left:11%;right:11%;top:8%;bottom:8%;border-left:1px solid rgba(255,231,152,.55);border-right:1px solid rgba(255,231,152,.55);border-radius:50%;box-shadow:-10px 0 rgba(255,224,132,.18),10px 0 rgba(255,224,132,.18)}
+.lantern-body:after{content:"";position:absolute;left:20%;right:20%;top:-8px;height:8px;border:1px solid rgba(255,224,132,.75);border-radius:50%;box-shadow:0 84px 0 -1px rgba(255,224,132,.72)}
+.lantern.left{left:7%;top:18%}.lantern.right{right:9%;top:32%}
+.lantern.lantern-small{width:42px;height:66px}.lantern.lantern-tall{width:66px;height:102px}
+.hero .lantern{z-index:1}
+.lanterns-rising .hero .lantern{animation:lantern-rise 1.8s cubic-bezier(.16,.84,.3,1) forwards,lantern-sway 5.8s ease-in-out 1.8s infinite}
+.lanterns-rising .hero .lantern:nth-of-type(1){animation-delay:.05s,1.85s}
+.lanterns-rising .hero .lantern:nth-of-type(2){animation-delay:.28s,2.08s}
+.lanterns-rising .hero .lantern:nth-of-type(3){animation-delay:.5s,2.3s}
+.lanterns-rising .hero .lantern:nth-of-type(4){animation-delay:.18s,1.98s}
+@keyframes lantern-rise{to{opacity:.6;transform:translate3d(0,0,0) rotate(0deg)}}
+@keyframes lantern-sway{0%,100%{transform:translate3d(-4px,3px,0) rotate(-3deg)}50%{transform:translate3d(7px,-14px,0) rotate(4deg)}}
+@keyframes lantern-drift{0%,100%{transform:translate3d(-4px,3px,0) rotate(-3deg)}50%{transform:translate3d(7px,-14px,0) rotate(4deg)}}
 .msg{opacity:0;transition:opacity 1.2s;text-align:center}
 .msg .tag{margin-top:.5rem}
 .slot{display:grid;place-items:center;min-height:6.5rem;width:100%}
@@ -139,9 +149,6 @@ footer .script{font-size:2.8rem;color:var(--rose)}
 
 <!-- Envelope -->
 <div id="gate">
-  <span class="lantern left" aria-hidden="true"></span>
-  <span class="lantern mid" aria-hidden="true"></span>
-  <span class="lantern right" aria-hidden="true"></span>
   <div class="gi">
     <img class="ganesha-mark" src="ganesha.png" alt="Lord Ganesha">
     <p class="ganesha">श्री गणेशाय नमः</p>
@@ -196,9 +203,12 @@ footer .script{font-size:2.8rem;color:var(--rose)}
 <main>
   <header class="hero">
     <div class="bg"></div>
-    <span class="lantern left" aria-hidden="true"></span>
-    <span class="lantern mid" aria-hidden="true"></span>
-    <span class="lantern right" aria-hidden="true"></span>
+    <span class="lantern lantern-tall" style="left:7%;top:18%" aria-hidden="true"><span class="lantern-body"></span></span>
+    <span class="lantern lantern-small" style="left:20%;top:42%" aria-hidden="true"><span class="lantern-body"></span></span>
+    <span class="lantern lantern-tall" style="left:3%;top:68%" aria-hidden="true"><span class="lantern-body"></span></span>
+    <span class="lantern lantern-tall" style="right:8%;top:25%" aria-hidden="true"><span class="lantern-body"></span></span>
+    <span class="lantern lantern-small" style="right:20%;top:48%" aria-hidden="true"><span class="lantern-body"></span></span>
+    <span class="lantern lantern-tall" style="right:3%;top:70%" aria-hidden="true"><span class="lantern-body"></span></span>
     <div class="hc">
       <p class="sans fd" style="--d:.5s">A match made in heaven</p>
       <h2 class="script nm" data-split data-d="800">Akansha</h2>
@@ -339,7 +349,7 @@ var Music=(function(){
 snd.onclick=function(){snd.style.opacity=Music.toggle()?1:.5};
 function openInvite(){
   if(opened)return;opened=true;
-  gate.classList.add('opening');if(window.startFx)window.startFx();
+  gate.classList.add('opening');document.body.classList.add('lanterns-rising');if(window.startFx)window.startFx();
   var mp=Music.start(MUSIC_SRC);snd.style.display='block';
   setTimeout(function(){env.classList.add('flip')},300);
   setTimeout(function(){env.classList.add('behind')},760);
